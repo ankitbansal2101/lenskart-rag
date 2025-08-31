@@ -390,43 +390,23 @@ function initializeChatbot() {
     chatIcon.addEventListener('click', toggleChatWindow);
     chatClose.addEventListener('click', toggleChatWindow);
     
-    // Load chatbot iframe dynamically (slight obfuscation)
-    loadChatbotIframe();
+    // Add console log to verify iframe is present
+    const iframe = document.querySelector('#chatIframeContainer iframe');
+    if (iframe) {
+        console.log('Chatbot iframe found in HTML');
+        iframe.onload = function() {
+            console.log('Chatbot iframe loaded successfully');
+        };
+        iframe.onerror = function() {
+            console.error('Failed to load chatbot iframe');
+        };
+    } else {
+        console.error('Chatbot iframe not found in HTML');
+    }
 }
 
 function toggleChatWindow() {
     chatWindow.classList.toggle('active');
-}
-
-function loadChatbotIframe() {
-    const container = document.getElementById('chatIframeContainer');
-    if (container && !container.querySelector('iframe')) {
-        const iframe = document.createElement('iframe');
-        
-        // URL components (provides minimal obfuscation)
-        const baseUrl = 'https://www.chatbase.co/chatbot-iframe/';
-        const chatbotId = 'rflku94vbCJkk8KHjPEo8';
-        
-        iframe.src = baseUrl + chatbotId;
-        iframe.width = '100%';
-        iframe.height = '100%';
-        iframe.frameBorder = '0';
-        iframe.setAttribute('allowfullscreen', 'true');
-        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-presentation');
-        iframe.style.cssText = 'height: 100%; min-height: 400px; border: none;';
-        
-        // Add error handling
-        iframe.onload = function() {
-            console.log('Chatbot iframe loaded successfully');
-        };
-        
-        iframe.onerror = function() {
-            console.error('Failed to load chatbot iframe');
-            container.innerHTML = '<div style="padding: 20px; text-align: center; color: #666;">Chat is temporarily unavailable. Please try again later.</div>';
-        };
-        
-        container.appendChild(iframe);
-    }
 }
 
 // Smooth scrolling for navigation links
