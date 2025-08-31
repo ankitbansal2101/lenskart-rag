@@ -389,10 +389,31 @@ function showNotification(message, type = 'success') {
 function initializeChatbot() {
     chatIcon.addEventListener('click', toggleChatWindow);
     chatClose.addEventListener('click', toggleChatWindow);
+    
+    // Load chatbot iframe dynamically (slight obfuscation)
+    loadChatbotIframe();
 }
 
 function toggleChatWindow() {
     chatWindow.classList.toggle('active');
+}
+
+function loadChatbotIframe() {
+    const container = document.getElementById('chatIframeContainer');
+    if (container && !container.querySelector('iframe')) {
+        const iframe = document.createElement('iframe');
+        
+        // URL components (provides minimal obfuscation)
+        const baseUrl = 'https://www.chatbase.co/chatbot-iframe/';
+        const chatbotId = 'rflku94vbCJkk8KHjPEo8';
+        
+        iframe.src = baseUrl + chatbotId;
+        iframe.width = '100%';
+        iframe.style.cssText = 'height: 100%; min-height: 400px; border: none;';
+        iframe.frameBorder = '0';
+        
+        container.appendChild(iframe);
+    }
 }
 
 // Smooth scrolling for navigation links
