@@ -583,6 +583,9 @@ body {
         width: 340px;
         height: 520px;
         max-height: 70vh;
+        right: 0;
+        left: auto;
+        bottom: 80px;
     }
     
     .chat-iframe-container iframe {
@@ -606,13 +609,14 @@ body {
     }
     
     .chat-window {
+        position: fixed !important;
         width: calc(100vw - 20px);
         height: 80vh;
         max-height: 600px;
         min-height: 450px;
-        right: 10px;
-        bottom: 85px;
         left: 10px;
+        bottom: 85px;
+        right: auto;
     }
     
     .chat-header {
@@ -638,6 +642,7 @@ body {
             height: 90vh;
             max-height: none;
             bottom: 10px;
+            position: fixed !important;
         }
         
         .chat-iframe-container iframe {
