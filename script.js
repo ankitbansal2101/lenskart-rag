@@ -409,8 +409,21 @@ function loadChatbotIframe() {
         
         iframe.src = baseUrl + chatbotId;
         iframe.width = '100%';
-        iframe.style.cssText = 'height: 100%; min-height: 400px; border: none;';
+        iframe.height = '100%';
         iframe.frameBorder = '0';
+        iframe.setAttribute('allowfullscreen', 'true');
+        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-presentation');
+        iframe.style.cssText = 'height: 100%; min-height: 400px; border: none;';
+        
+        // Add error handling
+        iframe.onload = function() {
+            console.log('Chatbot iframe loaded successfully');
+        };
+        
+        iframe.onerror = function() {
+            console.error('Failed to load chatbot iframe');
+            container.innerHTML = '<div style="padding: 20px; text-align: center; color: #666;">Chat is temporarily unavailable. Please try again later.</div>';
+        };
         
         container.appendChild(iframe);
     }
